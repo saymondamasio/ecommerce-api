@@ -45,16 +45,14 @@ export class User {
   password: string;
 
   @Column({
-    type: 'enum',
-    enum: Permission,
+    type: 'text',
     array: true,
     default: [Permission.PRODUCTS_LIST],
   })
   permissions: Permission[];
 
   @Column({
-    type: 'enum',
-    enum: Role,
+    type: 'text',
     array: true,
     default: [Role.CUSTOMER],
   })
