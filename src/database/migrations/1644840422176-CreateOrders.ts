@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateCustomers1644801929327 implements MigrationInterface {
+export class CreateOrders1644840422176 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'customers',
+        name: 'orders',
         columns: [
           {
             name: 'id',
@@ -14,58 +14,27 @@ export class CreateCustomers1644801929327 implements MigrationInterface {
             isGenerated: true,
           },
           {
-            name: 'name',
-            type: 'varchar',
-          },
-          {
-            name: 'birth_date',
-            type: 'timestamp',
-          },
-
-          {
-            name: 'cpf',
-            type: 'varchar',
-            isUnique: true,
-          },
-          {
-            name: 'phones',
-            type: 'varchar',
-          },
-          {
-            name: 'is_active',
-            type: 'boolean',
-            default: true,
+            name: 'cart',
+            type: 'text',
           },
           {
             name: 'store_id',
             type: 'uuid',
           },
           {
-            name: 'user_id',
+            name: 'customer_id',
             type: 'uuid',
           },
           {
-            name: 'street',
-            type: 'varchar',
+            name: 'payment_id',
+            type: 'uuid',
           },
           {
-            name: 'number',
-            type: 'varchar',
+            name: 'delivery_id',
+            type: 'uuid',
           },
           {
-            name: 'neighborhood',
-            type: 'varchar',
-          },
-          {
-            name: 'city',
-            type: 'varchar',
-          },
-          {
-            name: 'state',
-            type: 'varchar',
-          },
-          {
-            name: 'zip_code',
+            name: 'is_cancelled',
             type: 'varchar',
           },
           {
@@ -81,18 +50,34 @@ export class CreateCustomers1644801929327 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: 'UserCustomer',
-            referencedTableName: 'users',
+            name: 'CustomerOrder',
+            referencedTableName: 'customers',
             referencedColumnNames: ['id'],
-            columnNames: ['user_id'],
+            columnNames: ['customer_id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },
           {
-            name: 'StoreCustomer',
+            name: 'StoreOrder',
             referencedTableName: 'stores',
             referencedColumnNames: ['id'],
             columnNames: ['store_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
+          {
+            name: 'PaymentOrder',
+            referencedTableName: 'payments',
+            referencedColumnNames: ['id'],
+            columnNames: ['payment_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
+          {
+            name: 'DeliveryOrder',
+            referencedTableName: 'deliveries',
+            referencedColumnNames: ['id'],
+            columnNames: ['delivery_id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },
@@ -102,6 +87,6 @@ export class CreateCustomers1644801929327 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('customers');
+    await queryRunner.dropTable('orders');
   }
 }

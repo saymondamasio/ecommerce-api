@@ -20,7 +20,6 @@ export class CreateStores1644787274120 implements MigrationInterface {
           {
             name: 'email',
             type: 'varchar',
-            isUnique: true,
           },
           {
             name: 'cnpj',
@@ -29,31 +28,35 @@ export class CreateStores1644787274120 implements MigrationInterface {
           },
           {
             name: 'phones',
-            isArray: true,
             type: 'varchar',
           },
           {
-            name: 'street',
+            name: 'address_street',
             type: 'varchar',
           },
           {
-            name: 'number',
+            name: 'address_number',
             type: 'varchar',
           },
           {
-            name: 'neighborhood',
+            name: 'address_neighborhood',
             type: 'varchar',
           },
           {
-            name: 'city',
+            name: 'address_complement',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'address_city',
             type: 'varchar',
           },
           {
-            name: 'state',
+            name: 'address_state',
             type: 'varchar',
           },
           {
-            name: 'zip_code',
+            name: 'address_zip_code',
             type: 'varchar',
           },
           {

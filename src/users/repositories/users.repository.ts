@@ -20,8 +20,9 @@ export class UsersRepository extends Repository<User> {
     name,
     email,
     password,
+    store_id,
   }: ICreateUserDAO): Promise<User> {
-    const user = this.create({ name, email, password });
+    const user = this.create({ name, email, password, store_id });
 
     await this.save(user);
 

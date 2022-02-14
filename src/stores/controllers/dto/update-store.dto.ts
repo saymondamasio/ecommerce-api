@@ -1,4 +1,24 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateStoreDto } from './create-store.dto';
+import { Type } from 'class-transformer';
+import { IsEmail, IsObject, IsString, ValidateNested } from 'class-validator';
+import { IsCNPJ } from 'src/stores/decorators/IsCNPJ.decorator';
+import { Address } from 'src/stores/entities/address';
 
-export class UpdateStoreDto extends PartialType(CreateStoreDto) {}
+export class CreateStoreDTO {
+  @IsString()
+  name: string;
+
+  @IsCNPJ()
+  @IsString()
+  cnpj: string;
+
+  @IsEmail()
+  email: string;
+
+  @IsString({ each: true })
+  phones: string[];
+
+  @ValidateNested()
+  @IsObject()
+  @Type(() => Address)
+  address: Address;
+}

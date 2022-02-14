@@ -9,7 +9,12 @@ import { UsersRepository } from '../repositories/users.repository';
 export class CreateUserService {
   constructor(private usersRepository: UsersRepository) {}
 
-  async execute({ name, email, password }: CreateUserDTO): Promise<User> {
+  async execute({
+    name,
+    email,
+    password,
+    store_id,
+  }: CreateUserDTO): Promise<User> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
 
     if (checkUserExists) {
@@ -22,6 +27,7 @@ export class CreateUserService {
       name,
       email,
       password: hashedPassword,
+      store_id,
     });
 
     return user;

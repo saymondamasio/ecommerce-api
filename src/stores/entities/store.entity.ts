@@ -24,7 +24,7 @@ class Store {
   @Column('simple-array')
   phones: string[];
 
-  @Column(() => Address)
+  @Column(() => Address, { prefix: false })
   address: Address;
 
   @CreateDateColumn()

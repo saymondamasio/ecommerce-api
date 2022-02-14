@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateCustomers1644801929327 implements MigrationInterface {
+export class CreateReviews1644840828923 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'customers',
+        name: 'reviews',
         columns: [
           {
             name: 'id',
@@ -18,55 +18,21 @@ export class CreateCustomers1644801929327 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'birth_date',
-            type: 'timestamp',
-          },
-
-          {
-            name: 'cpf',
-            type: 'varchar',
-            isUnique: true,
+            name: 'text',
+            type: 'text',
           },
           {
-            name: 'phones',
-            type: 'varchar',
+            name: 'points',
+            type: 'int',
+            default: 0,
           },
           {
-            name: 'is_active',
-            type: 'boolean',
-            default: true,
+            name: 'product_id',
+            type: 'uuid',
           },
           {
             name: 'store_id',
             type: 'uuid',
-          },
-          {
-            name: 'user_id',
-            type: 'uuid',
-          },
-          {
-            name: 'street',
-            type: 'varchar',
-          },
-          {
-            name: 'number',
-            type: 'varchar',
-          },
-          {
-            name: 'neighborhood',
-            type: 'varchar',
-          },
-          {
-            name: 'city',
-            type: 'varchar',
-          },
-          {
-            name: 'state',
-            type: 'varchar',
-          },
-          {
-            name: 'zip_code',
-            type: 'varchar',
           },
           {
             name: 'created_at',
@@ -81,15 +47,15 @@ export class CreateCustomers1644801929327 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: 'UserCustomer',
-            referencedTableName: 'users',
+            name: 'ProductReview',
+            referencedTableName: 'products',
             referencedColumnNames: ['id'],
-            columnNames: ['user_id'],
+            columnNames: ['product_id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },
           {
-            name: 'StoreCustomer',
+            name: 'StoreReview',
             referencedTableName: 'stores',
             referencedColumnNames: ['id'],
             columnNames: ['store_id'],
@@ -102,6 +68,6 @@ export class CreateCustomers1644801929327 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('customers');
+    await queryRunner.dropTable('reviews');
   }
 }

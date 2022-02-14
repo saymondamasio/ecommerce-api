@@ -1,18 +1,27 @@
+import { IsOptional, IsString } from 'class-validator';
 import { Column } from 'typeorm';
 
 export class Address {
-  @Column()
+  @IsString()
+  @Column({ name: 'address_street' })
   public street: string;
-  @Column()
+  @IsString()
+  @Column({ name: 'address_number' })
   public number: string;
-  @Column()
+  @IsString()
+  @IsOptional()
+  @Column({ name: 'address_complement' })
   public complement: string;
-  @Column()
+  @IsString()
+  @Column({ name: 'address_neighborhood' })
   public neighborhood: string;
-  @Column()
+  @IsString()
+  @Column({ name: 'address_city' })
   public city: string;
-  @Column()
+  @IsString()
+  @Column({ name: 'address_state' })
   public state: string;
-  @Column()
+  @IsString()
+  @Column({ name: 'address_zip_code' })
   public zip_code: string;
 }
