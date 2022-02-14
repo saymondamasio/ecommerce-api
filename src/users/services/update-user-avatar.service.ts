@@ -3,11 +3,7 @@ import { AppError } from 'src/shared/errors/AppError';
 import { IStorageProvider } from 'src/shared/providers/StorageProvider/models/storage.provider';
 import { User } from '../entities/user.entity';
 import { UsersRepository } from '../repositories/users.repository';
-
-interface IRequest {
-  user_id: string;
-  avatarFilename: string;
-}
+import { UpdateUserAvatarBO } from './bos/update-user-avatar.bo';
 
 @Injectable()
 export class UpdateUserAvatarService {
@@ -17,7 +13,10 @@ export class UpdateUserAvatarService {
     private readonly storageProvider: IStorageProvider,
   ) {}
 
-  public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
+  public async execute({
+    user_id,
+    avatarFilename,
+  }: UpdateUserAvatarBO): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {

@@ -6,10 +6,6 @@ import { addHours } from 'src/utils/date';
 import { UserTokensRepository } from '../repositories/user-tokens.repository';
 import { UsersRepository } from '../repositories/users.repository';
 
-interface IRequest {
-  email: string;
-}
-
 @Injectable()
 export class SendForgotPasswordEmailService {
   constructor(
@@ -19,7 +15,7 @@ export class SendForgotPasswordEmailService {
     private config: ConfigService,
   ) {}
 
-  async execute({ email }: IRequest): Promise<void> {
+  async execute(email: string): Promise<void> {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {

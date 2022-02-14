@@ -4,6 +4,7 @@ import { AppError } from 'src/shared/errors/AppError';
 import { compareIfBefore } from 'src/utils/date';
 import { UserTokensRepository } from '../repositories/user-tokens.repository';
 import { UsersRepository } from '../repositories/users.repository';
+import { ResetPasswordBO } from './bos/reset-password.bo';
 
 interface IRequest {
   password: string;
@@ -17,7 +18,7 @@ export class ResetPasswordService {
     private userTokensRepository: UserTokensRepository,
   ) {}
 
-  async execute({ token, password }: IRequest): Promise<void> {
+  async execute({ token, password }: ResetPasswordBO): Promise<void> {
     const userToken = await this.userTokensRepository.findByToken(token);
 
     if (!userToken) {

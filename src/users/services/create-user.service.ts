@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { hash } from 'bcrypt';
 import { AppError } from 'src/shared/errors/AppError';
-import { CreateUserDTO } from '../controllers/dtos/create-user.dto';
 import { User } from '../entities/user.entity';
 import { UsersRepository } from '../repositories/users.repository';
+import { CreateUserBO } from './bos/create-user.bo';
 
 @Injectable()
 export class CreateUserService {
@@ -14,7 +14,7 @@ export class CreateUserService {
     email,
     password,
     store_id,
-  }: CreateUserDTO): Promise<User> {
+  }: CreateUserBO): Promise<User> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
 
     if (checkUserExists) {
