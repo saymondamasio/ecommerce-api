@@ -12,8 +12,9 @@ import { AuthModule } from './auth/auth.module';
 import { PermissionsGuard } from './auth/guards/permissions.guard';
 import { RolesGuard } from './auth/guards/roles.guard';
 import { storageConfig } from './config/storage';
+import { CustomerModule } from './customers/customer.module';
 import { SharedModule } from './shared/shared.module';
-import { StoreModule } from './store/store.module';
+import { StoreModule } from './stores/store.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -49,6 +50,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     SharedModule,
     StoreModule,
+    CustomerModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateUsers1644787274303 implements MigrationInterface {
+export class CreateStores1644787274120 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'stores',
         columns: [
           {
             name: 'id',
@@ -23,29 +23,38 @@ export class CreateUsers1644787274303 implements MigrationInterface {
             isUnique: true,
           },
           {
-            name: 'avatar',
+            name: 'cnpj',
             type: 'varchar',
-            isNullable: true,
+            isUnique: true,
           },
           {
-            name: 'password',
+            name: 'phones',
+            isArray: true,
             type: 'varchar',
           },
           {
-            name: 'permissions',
-            type: 'text',
-            isArray: true,
-            default: "'{products.list, store.list}'",
+            name: 'street',
+            type: 'varchar',
           },
           {
-            name: 'roles',
-            type: 'text',
-            isArray: true,
-            default: "'{guest}'",
+            name: 'number',
+            type: 'varchar',
           },
           {
-            name: 'store_id',
-            type: 'uuid',
+            name: 'neighborhood',
+            type: 'varchar',
+          },
+          {
+            name: 'city',
+            type: 'varchar',
+          },
+          {
+            name: 'state',
+            type: 'varchar',
+          },
+          {
+            name: 'zip_code',
+            type: 'varchar',
           },
           {
             name: 'created_at',
@@ -58,21 +67,11 @@ export class CreateUsers1644787274303 implements MigrationInterface {
             default: 'now()',
           },
         ],
-        foreignKeys: [
-          {
-            name: 'StoreUser',
-            referencedTableName: 'stores',
-            referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-          },
-        ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable('stores');
   }
 }

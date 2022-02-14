@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateStore1644801165344 implements MigrationInterface {
+export class CreateCustomers1644801929327 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'stores',
+        name: 'customers',
         columns: [
           {
             name: 'id',
@@ -18,19 +18,32 @@ export class CreateStore1644801165344 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'email',
-            type: 'varchar',
-            isUnique: true,
+            name: 'birth_date',
+            type: 'timestamp',
           },
+
           {
-            name: 'cnpj',
+            name: 'cpf',
             type: 'varchar',
             isUnique: true,
           },
           {
             name: 'phones',
-            isArray: true,
             type: 'varchar',
+            isArray: true,
+          },
+          {
+            name: 'is_active',
+            type: 'boolean',
+            default: true,
+          },
+          {
+            name: 'store_id',
+            type: 'uuid',
+          },
+          {
+            name: 'user_id',
+            type: 'uuid',
           },
           {
             name: 'street',
@@ -67,11 +80,29 @@ export class CreateStore1644801165344 implements MigrationInterface {
             default: 'now()',
           },
         ],
+        foreignKeys: [
+          {
+            name: 'UserCustomer',
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            columnNames: ['user_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
+          {
+            name: 'StoreCustomer',
+            referencedTableName: 'stores',
+            referencedColumnNames: ['id'],
+            columnNames: ['store_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
+        ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('stores');
+    await queryRunner.dropTable('customers');
   }
 }
