@@ -4,15 +4,16 @@ import {
   Controller,
   Patch,
   Post,
-  Req,
   UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiConsumes } from '@nestjs/swagger';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ApiFile } from 'src/shared/decorators/api-file.decorator';
+import { User } from '../entities/user.entity';
 import { CreateUserService } from '../services/create-user.service';
 import { UpdateUserAvatarService } from '../services/update-user-avatar.service';
 import { CreateUserDTO } from './dtos/create-user.dto';
@@ -36,10 +37,13 @@ export class UsersController {
   @ApiFile('avatar')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('avatar'))
-  uploadFile(@UploadedFile() file: Express.Multer.File, @Req() req) {
+  uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @CurrentUser() user: User,
+  ) {
     return this.updateUserAvatarService.execute({
       avatarFilename: file.filename,
-      user_id: req.user.id,
+      user_id: user.id,
     });
   }
 }

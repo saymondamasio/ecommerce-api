@@ -22,7 +22,7 @@ export class PasswordController {
   @Post('forgot')
   @ApiBody({ type: ForgotPasswordDTO })
   forgotPassword(@Body() { email }: ForgotPasswordDTO) {
-    return this.sendForgotPasswordEmailService.execute({ email });
+    return this.sendForgotPasswordEmailService.execute(email);
   }
 
   @Post('reset')

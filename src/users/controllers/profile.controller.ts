@@ -4,12 +4,13 @@ import {
   Controller,
   Get,
   Put,
-  Req,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiBody } from '@nestjs/swagger';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { User } from '../entities/user.entity';
 import { ShowProfileService } from '../services/show-profile.service';
 import { UpdateProfileService } from '../services/update-profile.service';
 import { UpdateProfileDTO } from './dtos/update-profile.dto';
@@ -22,17 +23,17 @@ export class ProfileController {
     private updateProfileService: UpdateProfileService,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
   @Get()
-  get(@Req() req) {
-    return this.showProfileService.execute(req.user.id);
+  @UseGuards(JwtAuthGuard)
+  get(@CurrentUser() user: User) {
+    return this.showProfileService.execute(user.id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Put()
   @ApiBody({ type: UpdateProfileDTO })
   update(
-    @Req() req,
+    @CurrentUser() user: User,
     @Body()
     { email, name, old_password, password }: UpdateProfileDTO,
   ) {
@@ -41,7 +42,7 @@ export class ProfileController {
       name,
       old_password,
       password,
-      user_id: req.user.id,
+      user_id: user.id,
     });
   }
 }

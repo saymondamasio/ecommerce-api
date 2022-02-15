@@ -45,27 +45,31 @@ export class CreateCustomers1644801929327 implements MigrationInterface {
             type: 'uuid',
           },
           {
-            name: 'street',
+            name: 'address_street',
             type: 'varchar',
           },
           {
-            name: 'number',
+            name: 'address_number',
             type: 'varchar',
           },
           {
-            name: 'neighborhood',
+            name: 'address_complement',
             type: 'varchar',
           },
           {
-            name: 'city',
+            name: 'address_neighborhood',
             type: 'varchar',
           },
           {
-            name: 'state',
+            name: 'address_city',
             type: 'varchar',
           },
           {
-            name: 'zip_code',
+            name: 'address_state',
+            type: 'varchar',
+          },
+          {
+            name: 'address_zip_code',
             type: 'varchar',
           },
           {

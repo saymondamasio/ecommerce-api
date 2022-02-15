@@ -28,14 +28,27 @@ export class AuthService {
     return null;
   }
 
-  async refreshToken(payload: any) {
+  async refreshToken(user: User) {
+    const payload = {
+      email: user.email,
+      sub: user.id,
+      store_id: user.store_id,
+      roles: user.roles,
+      permissions: user.permissions,
+    };
     return {
       token: this.jwtService.sign(payload),
     };
   }
 
   async login(user: User, res: Response) {
-    const payload = { email: user.email, sub: user.id };
+    const payload = {
+      email: user.email,
+      sub: user.id,
+      store_id: user.store_id,
+      roles: user.roles,
+      permissions: user.permissions,
+    };
 
     const refresh_token = this.jwtService.sign(payload, {
       secret: this.configService.get('JWT_REFRESH_TOKEN_SECRET'),

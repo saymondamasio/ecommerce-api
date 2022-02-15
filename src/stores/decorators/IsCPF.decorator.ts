@@ -5,7 +5,7 @@ import {
   ValidatorOptions,
 } from 'class-validator';
 
-export function IsCPF(validationOptions: ValidatorOptions) {
+export function IsCPF(validationOptions?: ValidatorOptions) {
   return (object: any, propertyName: string) => {
     registerDecorator({
       name: 'isCPF',

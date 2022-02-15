@@ -29,7 +29,7 @@ class Customer {
   @Column('simple-array')
   phones: string[];
 
-  @Column(() => Address)
+  @Column(() => Address, { prefix: false })
   address: Address;
 
   @Column()
