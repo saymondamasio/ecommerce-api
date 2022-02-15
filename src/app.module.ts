@@ -8,13 +8,14 @@ import { getConnectionOptions } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { CategoriesModule } from './categories/categories.module';
 import { storageConfig } from './config/storage';
 import { CustomerModule } from './customers/customer.module';
+import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from './stores/store.module';
 import { UsersModule } from './users/users.module';
-import { CategoriesModule } from './categories/categories.module';
-import { ProductsModule } from './products/products.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { ProductsModule } from './products/products.module';
     CustomerModule,
     CategoriesModule,
     ProductsModule,
+    PaymentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
