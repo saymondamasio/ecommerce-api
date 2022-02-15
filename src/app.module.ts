@@ -13,6 +13,7 @@ import { CustomerModule } from './customers/customer.module';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from './stores/store.module';
 import { UsersModule } from './users/users.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { UsersModule } from './users/users.module';
     SharedModule,
     StoreModule,
     CustomerModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
