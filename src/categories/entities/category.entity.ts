@@ -1,10 +1,12 @@
 import Store from 'src/stores/entities/store.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('categories')
@@ -24,4 +26,10 @@ export class Category {
   @ManyToOne(() => Store)
   @JoinColumn({ name: 'store_id' })
   store: Store;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

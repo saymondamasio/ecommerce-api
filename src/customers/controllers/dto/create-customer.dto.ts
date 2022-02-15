@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsObject, IsString, ValidateNested } from 'class-validator';
 import { Address } from 'src/customers/entities/address';
-import { IsCPF } from 'src/stores/decorators/IsCPF.decorator';
+import { IsCPF } from 'src/shared/decorators/is-cpf.decorator';
 
 export class createCustomerDTO {
   @IsString()

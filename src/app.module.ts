@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 import { StoreModule } from './stores/store.module';
 import { UsersModule } from './users/users.module';
 import { CategoriesModule } from './categories/categories.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { CategoriesModule } from './categories/categories.module';
     StoreModule,
     CustomerModule,
     CategoriesModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsEmail, IsObject, IsString, ValidateNested } from 'class-validator';
-import { IsCNPJ } from 'src/stores/decorators/IsCNPJ.decorator';
+import { IsCNPJ } from 'src/shared/decorators/is-cnpj.decorator';
 import { Address } from 'src/stores/entities/address';
 
 export class CreateStoreDTO {
