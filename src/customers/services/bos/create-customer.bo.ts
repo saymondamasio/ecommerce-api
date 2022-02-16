@@ -7,4 +7,5 @@ export class CreateCustomerBO {
   phones: string[];
   address: Address;
   user_id: string;
+  birth_date: Date;
 }

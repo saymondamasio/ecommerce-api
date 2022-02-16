@@ -20,10 +20,21 @@ export class CreateCategories1644838392824 implements MigrationInterface {
           {
             name: 'availability',
             type: 'boolean',
+            default: true,
           },
           {
             name: 'store_id',
             type: 'uuid',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
           },
         ],
         foreignKeys: [

@@ -16,10 +16,13 @@ export class CreateDeliveries1644840162074 implements MigrationInterface {
           {
             name: 'tracking_code',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'type',
-            type: 'varchar',
+            enumName: 'type_delivery',
+            type: 'enum',
+            enum: ['PAC', 'SEDEX', 'SEDEX_10', 'SEDEX_12', 'SEDEX_HOJE'],
           },
           {
             name: 'cost',
@@ -46,6 +49,11 @@ export class CreateDeliveries1644840162074 implements MigrationInterface {
           {
             name: 'neighborhood',
             type: 'varchar',
+          },
+          {
+            name: 'complement',
+            type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'city',

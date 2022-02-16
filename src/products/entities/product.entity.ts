@@ -23,11 +23,26 @@ export class Product {
   @Column()
   title: string;
 
-  @Column({ default: true })
+  @Column('boolean', { default: true })
   availability: boolean;
 
   @Column()
   description: string;
+
+  @Column('decimal')
+  height: number;
+
+  @Column('decimal')
+  width: number;
+
+  @Column('decimal')
+  length: number;
+
+  @Column('decimal')
+  weight: number;
+
+  @Column('decimal', { default: 0 })
+  stock: number;
 
   @Column({ type: 'simple-array' })
   photos: string[];

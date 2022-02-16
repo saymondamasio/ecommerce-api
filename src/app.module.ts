@@ -11,11 +11,13 @@ import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { storageConfig } from './config/storage';
 import { CustomerModule } from './customers/customer.module';
+import { DeliveriesModule } from './deliveries/deliveries.module';
+import { OrdersModule } from './orders/orders.module';
+import { PaymentsModule } from './payments/payments.module';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from './stores/store.module';
 import { UsersModule } from './users/users.module';
-import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
@@ -27,6 +29,7 @@ import { PaymentsModule } from './payments/payments.module';
         Object.assign(await getConnectionOptions(), {
           autoLoadEntities: true,
           migrationsRun: true,
+          logging: true,
         }),
     }),
     MongooseModule.forRootAsync({
@@ -54,6 +57,8 @@ import { PaymentsModule } from './payments/payments.module';
     CategoriesModule,
     ProductsModule,
     PaymentsModule,
+    DeliveriesModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

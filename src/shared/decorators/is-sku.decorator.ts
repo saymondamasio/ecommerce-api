@@ -12,11 +12,11 @@ export function IsSKU(validationOptions?: ValidatorOptions) {
       propertyName,
       constraints: [],
       options: validationOptions || {
-        message: '$property is not a valid SKU',
+        message: '$property is not a valid SKU ex: XX9999 ',
       },
       validator: {
         validate(value: any, args: ValidationArguments) {
-          return /([a-zA-Z]{2}\\d{4,18})?/.test(value);
+          return value && /[a-zA-Z]{2}\d{4,18}?/.test(value);
         },
       },
     });

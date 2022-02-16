@@ -24,6 +24,7 @@ export class CreateProducts1644838628973 implements MigrationInterface {
           {
             name: 'availability',
             type: 'boolean',
+            default: true,
           },
           {
             name: 'description',
@@ -32,6 +33,7 @@ export class CreateProducts1644838628973 implements MigrationInterface {
           {
             name: 'photos',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'price',
@@ -44,6 +46,35 @@ export class CreateProducts1644838628973 implements MigrationInterface {
             type: 'decimal',
             precision: 10,
             scale: 2,
+          },
+          {
+            name: 'height',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+          },
+          {
+            name: 'width',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+          },
+          {
+            name: 'length',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+          },
+          {
+            name: 'weight',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+          },
+          {
+            name: 'stock',
+            type: 'int',
+            default: 0,
           },
           {
             name: 'category_id',

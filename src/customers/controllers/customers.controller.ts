@@ -30,21 +30,21 @@ export class CustomersController {
     private createCustomer: CreateCustomerService,
   ) {}
 
-  @Roles(Role.ADMIN)
+  @Roles(Role.GUEST)
   @UseGuards(JwtAuthGuard, ValidateStoreGuard, RolesGuard)
   @Get()
   async index(@Query('store_id') store_id: string) {
     return this.listCustomers.execute(store_id);
   }
 
-  @Roles(Role.ADMIN)
+  @Roles(Role.GUEST)
   @UseGuards(JwtAuthGuard, ValidateStoreGuard, RolesGuard)
   @Get(':id')
   async show(@Query('store_id') store_id: string, @Param('id') id: string) {
     return this.showCustomer.execute({ store_id, customer_id: id });
   }
 
-  @Roles(Role.CUSTOMER)
+  @Roles(Role.GUEST)
   @UseGuards(JwtAuthGuard, ValidateStoreGuard, RolesGuard)
   @Get('me')
   async showSelfCustomer(

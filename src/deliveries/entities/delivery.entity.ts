@@ -1,39 +1,35 @@
 import Store from 'src/stores/entities/store.entity';
-import { User } from 'src/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Address } from './address';
+import { TypeDelivery } from './type-delivery.enum';
 
-@Entity('customers')
-class Customer {
+@Entity('deliveries')
+export class Delivery {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  name: string;
+  tracking_code: string;
 
-  @Column()
-  cpf: string;
-
-  @Column()
-  is_active: boolean;
-
-  @Column('timestamp')
-  birth_date: Date;
-
-  @Column('simple-array')
-  phones: string[];
+  @Column({ type: 'enum', enum: TypeDelivery })
+  type: TypeDelivery;
 
   @Column(() => Address, { prefix: false })
   address: Address;
+
+  @Column('decimal', { precision: 10, scale: 2 })
+  cost: number;
+
+  @Column('timestamp')
+  deadline: Date;
 
   @Column()
   store_id: string;
@@ -42,18 +38,9 @@ class Customer {
   @JoinColumn({ name: 'store_id' })
   store: Store;
 
-  @Column()
-  user_id: string;
-
-  @OneToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
-  user: User;
-
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
 }
-
-export default Customer;

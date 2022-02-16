@@ -1,5 +1,10 @@
 import { Type } from 'class-transformer';
-import { IsObject, IsString, ValidateNested } from 'class-validator';
+import {
+  IsDateString,
+  IsObject,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 import { Address } from 'src/customers/entities/address';
 import { IsCPF } from 'src/shared/decorators/is-cpf.decorator';
 
@@ -13,6 +18,9 @@ export class createCustomerDTO {
 
   @IsString({ each: true })
   phones: string[];
+
+  @IsDateString()
+  birth_date: Date;
 
   @ValidateNested()
   @IsObject()

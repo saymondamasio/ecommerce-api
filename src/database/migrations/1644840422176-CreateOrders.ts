@@ -36,6 +36,7 @@ export class CreateOrders1644840422176 implements MigrationInterface {
           {
             name: 'is_cancelled',
             type: 'varchar',
+            default: false,
           },
           {
             name: 'created_at',

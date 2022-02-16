@@ -5,23 +5,29 @@ export class Address {
   @IsString()
   @Column()
   public street: string;
-  @IsString()
+
   @Column()
+  @IsString()
   public number: string;
-  @IsString()
+
+  @Column()
   @IsOptional()
-  @Column()
+  @IsString()
   public complement: string;
-  @IsString()
+
   @Column()
+  @IsString()
   public neighborhood: string;
-  @IsString()
+
   @Column()
+  @IsString()
   public city: string;
-  @IsString()
+
   @Column()
+  @IsString()
   public state: string;
-  @IsString()
+
   @Column()
+  @IsString()
   public zip_code: string;
 }
