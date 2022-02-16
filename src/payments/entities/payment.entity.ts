@@ -1,3 +1,4 @@
+import { Order } from 'src/orders/entities/order.entity';
 import Store from 'src/stores/entities/store.entity';
 import {
   Column,
@@ -5,6 +6,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -23,6 +25,9 @@ export class Payment {
 
   @Column()
   store_id: string;
+
+  @OneToOne(() => Order, (order) => order.payment)
+  order: Order;
 
   @ManyToOne(() => Store)
   @JoinColumn({ name: 'store_id' })

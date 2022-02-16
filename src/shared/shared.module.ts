@@ -6,6 +6,7 @@ import * as path from 'path';
 import { storageConfig } from 'src/config/storage';
 import { MailService } from './mail/mail.service';
 import DiskStorageProvider from './providers/StorageProvider/implementations/disk-storage.provider';
+import StripeService from './services/stripe.service';
 
 const providers = {
   disk: DiskStorageProvider,
@@ -43,7 +44,8 @@ const providers = {
       useClass: providers[storageConfig.provider],
     },
     MailService,
+    StripeService,
   ],
-  exports: ['StorageProvider', MailService],
+  exports: ['StorageProvider', MailService, StripeService],
 })
 export class SharedModule {}
