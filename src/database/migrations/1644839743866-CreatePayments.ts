@@ -26,6 +26,11 @@ export class CreatePayments1644839743866 implements MigrationInterface {
             enum: ['PENDING', 'PAID', 'CANCELED'],
           },
           {
+            name: 'client_secret_stripe',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'store_id',
             type: 'uuid',
           },

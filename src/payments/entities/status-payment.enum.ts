@@ -1,5 +1,5 @@
 export enum StatusPayment {
   PENDING = 'PENDING',
-  CONFIRMED = 'CONFIRMED',
+  PAID = 'PAID',
   CANCELED = 'CANCELED',
 }

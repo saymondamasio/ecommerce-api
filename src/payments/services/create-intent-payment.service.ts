@@ -14,8 +14,6 @@ export class CreateIntentPaymentService {
       relations: ['order'],
     });
 
-    console.log(payment);
-
     const cart = payment.order.cart;
 
     const amount = cart.reduce(
@@ -26,6 +24,10 @@ export class CreateIntentPaymentService {
     const intentPaymentStripe = await this.stripeService.createPaymentIntent(
       amount,
     );
+
+    payment.client_secret_stripe = intentPaymentStripe.client_secret;
+
+    this.paymentsRepository.save(payment);
 
     return { client_secret: intentPaymentStripe.client_secret };
   }

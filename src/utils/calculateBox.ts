@@ -81,7 +81,6 @@ export function calculateBox(cart: Cart[]) {
 
     // passo N - verificando se item tem dimensoes maiores que a caixa...
     if (item.width > box.largura) box.largura = item.width;
-    console.log('Largura ' + item.width, box.largura);
 
     if (item.length > box.comprimento) box.comprimento = item.length;
 

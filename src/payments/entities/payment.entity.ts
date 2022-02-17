@@ -24,6 +24,9 @@ export class Payment {
   status: StatusPayment;
 
   @Column()
+  client_secret_stripe: string;
+
+  @Column()
   store_id: string;
 
   @OneToOne(() => Order, (order) => order.payment)

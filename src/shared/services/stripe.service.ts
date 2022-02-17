@@ -23,4 +23,12 @@ export default class StripeService {
       },
     });
   }
+
+  getEvent(
+    payload: string | Buffer,
+    header: string | Buffer,
+    secret: string,
+  ): Stripe.Event {
+    return this.stripe.webhooks.constructEvent(payload, header, secret);
+  }
 }

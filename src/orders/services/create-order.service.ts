@@ -138,14 +138,6 @@ export class CreateOrderService {
       throw new BadRequestException('Customer not found');
     }
 
-    console.log({
-      store_id,
-      address: delivery.address,
-      deadline: delivery.deadline,
-      cost: delivery.cost,
-      type: delivery.type,
-    });
-
     const deliveryCreated = this.deliveriesRepository.create({
       store_id,
       address: delivery.address,
@@ -162,8 +154,6 @@ export class CreateOrderService {
       store_id,
     });
     await this.paymentsRepository.save(paymentCreated);
-
-    console.log(customer, paymentCreated, deliveryCreated);
 
     const order = this.ordersRepository.create({
       customer_id: customer.id,
