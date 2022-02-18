@@ -5,8 +5,7 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -39,14 +38,14 @@ import { UsersModule } from './users/users.module';
           logging: true,
         }),
     }),
-    MongooseModule.forRootAsync({
-      useFactory: (config: ConfigService) => ({
-        uri: config.get('MONGO_URI'),
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }),
-      inject: [ConfigService],
-    }),
+    // MongooseModule.forRootAsync({
+    //   useFactory: (config: ConfigService) => ({
+    //     uri: config.get('MONGO_URI'),
+    //     useNewUrlParser: true,
+    //     useUnifiedTopology: true,
+    //   }),
+    //   inject: [ConfigService],
+    // }),
     ServeStaticModule.forRoot({
       rootPath: storageConfig.uploadFolder,
       serveRoot: '/files',

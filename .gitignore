@@ -38,8 +38,8 @@ lerna-debug.log*
 .env
 
 # Temp
-temp
-!.temp/.gitkeep
+tmp
+!.tmp/.gitkeep
 uploads
 !.uploads/.gitkeep
 uploads/avatar

@@ -3,7 +3,7 @@ import { diskStorage, StorageEngine } from 'multer';
 import * as path from 'path';
 
 const rootFolder = path.resolve(__dirname, '..', '..');
-const tmpFolder = path.resolve(__dirname, rootFolder, 'temp');
+const tmpFolder = path.resolve(__dirname, rootFolder, 'tmp');
 const uploadFolder = path.resolve(__dirname, rootFolder, 'uploads');
 
 interface IStorageConfig {
