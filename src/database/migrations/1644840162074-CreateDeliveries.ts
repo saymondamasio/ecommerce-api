@@ -35,10 +35,6 @@ export class CreateDeliveries1644840162074 implements MigrationInterface {
             type: 'timestamp',
           },
           {
-            name: 'store_id',
-            type: 'uuid',
-          },
-          {
             name: 'street',
             type: 'varchar',
           },
@@ -76,16 +72,6 @@ export class CreateDeliveries1644840162074 implements MigrationInterface {
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
-          },
-        ],
-        foreignKeys: [
-          {
-            name: 'StoreDelivery',
-            referencedTableName: 'stores',
-            referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
           },
         ],
       }),

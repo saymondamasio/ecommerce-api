@@ -24,10 +24,13 @@ export class UpdateUserAvatarService {
     }
 
     if (user.avatar) {
-      await this.storageProvider.deleteFile(user.avatar);
+      await this.storageProvider.deleteFile(user.avatar, 'avatar');
     }
 
-    const fileName = await this.storageProvider.saveFile(avatarFilename);
+    const fileName = await this.storageProvider.saveFile(
+      avatarFilename,
+      'avatar',
+    );
 
     user.avatar = fileName;
 

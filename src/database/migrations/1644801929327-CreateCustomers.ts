@@ -37,10 +37,6 @@ export class CreateCustomers1644801929327 implements MigrationInterface {
             default: true,
           },
           {
-            name: 'store_id',
-            type: 'uuid',
-          },
-          {
             name: 'user_id',
             type: 'uuid',
           },
@@ -90,14 +86,6 @@ export class CreateCustomers1644801929327 implements MigrationInterface {
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
             columnNames: ['user_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-          },
-          {
-            name: 'StoreCustomer',
-            referencedTableName: 'stores',
-            referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },

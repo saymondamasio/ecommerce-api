@@ -44,10 +44,6 @@ export class CreateUsers1644787274303 implements MigrationInterface {
             default: "'{guest}'",
           },
           {
-            name: 'store_id',
-            type: 'uuid',
-          },
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -56,16 +52,6 @@ export class CreateUsers1644787274303 implements MigrationInterface {
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
-          },
-        ],
-        foreignKeys: [
-          {
-            name: 'StoreUser',
-            referencedTableName: 'stores',
-            referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
           },
         ],
       }),

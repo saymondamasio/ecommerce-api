@@ -17,7 +17,6 @@ export class CreateCustomerService {
     cpf,
     name,
     phones,
-    store_id,
     user_id,
     birth_date,
   }: CreateCustomerBO): Promise<Customer> {
@@ -32,7 +31,6 @@ export class CreateCustomerService {
       cpf,
       name,
       phones,
-      store_id,
       user_id,
       birth_date,
     });

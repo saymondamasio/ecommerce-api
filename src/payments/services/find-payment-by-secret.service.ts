@@ -11,8 +11,6 @@ export class FindPaymentBySecretService {
       client_secret_stripe,
     });
 
-    console.log('Pagamento ' + payment, client_secret_stripe);
-
     return payment;
   }
 }

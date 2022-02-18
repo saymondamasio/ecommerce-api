@@ -1,4 +1,10 @@
-import { Module } from '@nestjs/common';
+import {
+  Global,
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MulterModule } from '@nestjs/platform-express';
@@ -15,10 +21,11 @@ import { DeliveriesModule } from './deliveries/deliveries.module';
 import { OrdersModule } from './orders/orders.module';
 import { PaymentsModule } from './payments/payments.module';
 import { ProductsModule } from './products/products.module';
+import { RawBodyMiddleware } from './shared/middlewares/raw-body.middleware';
 import { SharedModule } from './shared/shared.module';
-import { StoreModule } from './stores/store.module';
 import { UsersModule } from './users/users.module';
 
+@Global()
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -52,7 +59,6 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AuthModule,
     SharedModule,
-    StoreModule,
     CustomerModule,
     CategoriesModule,
     ProductsModule,
@@ -62,5 +68,13 @@ import { UsersModule } from './users/users.module';
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [MulterModule],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(RawBodyMiddleware).forRoutes({
+      path: '/payments/stripe/webhooks',
+      method: RequestMethod.ALL,
+    });
+  }
+}

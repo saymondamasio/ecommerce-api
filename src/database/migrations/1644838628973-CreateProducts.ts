@@ -81,10 +81,6 @@ export class CreateProducts1644838628973 implements MigrationInterface {
             type: 'uuid',
           },
           {
-            name: 'store_id',
-            type: 'uuid',
-          },
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -101,14 +97,6 @@ export class CreateProducts1644838628973 implements MigrationInterface {
             referencedTableName: 'categories',
             referencedColumnNames: ['id'],
             columnNames: ['category_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-          },
-          {
-            name: 'StoreProduct',
-            referencedTableName: 'stores',
-            referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },

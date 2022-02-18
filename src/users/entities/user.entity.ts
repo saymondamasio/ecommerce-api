@@ -1,12 +1,9 @@
 import { Exclude, Expose } from 'class-transformer';
 import { storageConfig } from 'src/config/storage';
-import Store from 'src/stores/entities/store.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -35,9 +32,9 @@ export class User {
 
     switch (storageConfig.provider) {
       case 'disk':
-        return `${process.env.APP_API_URL}/files/${this.avatar}`;
+        return `${process.env.APP_API_URL}/files/avatar/${this.avatar}`;
       case 's3':
-        return `https://${storageConfig.config.aws.bucket}.s3.amazonaws.com/${this.avatar}`;
+        return `https://${storageConfig.config.aws.bucket}.s3.amazonaws.com/avatar/${this.avatar}`;
       default:
         return undefined;
     }
@@ -60,13 +57,6 @@ export class User {
     default: [Role.CUSTOMER],
   })
   roles: Role[];
-
-  @Column()
-  store_id: string;
-
-  @ManyToOne(() => Store)
-  @JoinColumn({ name: 'store_id' })
-  store: Store;
 
   @CreateDateColumn()
   created_at: Date;

@@ -31,10 +31,6 @@ export class CreateReviews1644840828923 implements MigrationInterface {
             type: 'uuid',
           },
           {
-            name: 'store_id',
-            type: 'uuid',
-          },
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -51,14 +47,6 @@ export class CreateReviews1644840828923 implements MigrationInterface {
             referencedTableName: 'products',
             referencedColumnNames: ['id'],
             columnNames: ['product_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-          },
-          {
-            name: 'StoreReview',
-            referencedTableName: 'stores',
-            referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },

@@ -10,5 +10,4 @@ export class CreateProductBO {
   stock: number;
   promotional_price: number;
   category_id: string;
-  store_id: string;
 }

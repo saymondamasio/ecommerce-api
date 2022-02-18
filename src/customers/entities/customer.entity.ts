@@ -1,11 +1,9 @@
-import Store from 'src/stores/entities/store.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -34,13 +32,6 @@ class Customer {
 
   @Column(() => Address, { prefix: false })
   address: Address;
-
-  @Column()
-  store_id: string;
-
-  @ManyToOne(() => Store)
-  @JoinColumn({ name: 'store_id' })
-  store: Store;
 
   @Column()
   user_id: string;

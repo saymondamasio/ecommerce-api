@@ -7,8 +7,4 @@ export class Cart {
   @IsPositive()
   @IsNumber()
   quantity: number;
-
-  @IsNumber()
-  @IsPositive()
-  unit_price: number;
 }

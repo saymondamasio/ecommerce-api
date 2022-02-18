@@ -1,11 +1,8 @@
 import { Order } from 'src/orders/entities/order.entity';
-import Store from 'src/stores/entities/store.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -26,15 +23,8 @@ export class Payment {
   @Column()
   client_secret_stripe: string;
 
-  @Column()
-  store_id: string;
-
   @OneToOne(() => Order, (order) => order.payment)
   order: Order;
-
-  @ManyToOne(() => Store)
-  @JoinColumn({ name: 'store_id' })
-  store: Store;
 
   @CreateDateColumn()
   created_at: Date;

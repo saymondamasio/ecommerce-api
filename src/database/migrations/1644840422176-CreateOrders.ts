@@ -18,10 +18,6 @@ export class CreateOrders1644840422176 implements MigrationInterface {
             type: 'text',
           },
           {
-            name: 'store_id',
-            type: 'uuid',
-          },
-          {
             name: 'customer_id',
             type: 'uuid',
           },
@@ -55,14 +51,6 @@ export class CreateOrders1644840422176 implements MigrationInterface {
             referencedTableName: 'customers',
             referencedColumnNames: ['id'],
             columnNames: ['customer_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-          },
-          {
-            name: 'StoreOrder',
-            referencedTableName: 'stores',
-            referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },

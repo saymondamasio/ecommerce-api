@@ -1,10 +1,10 @@
 import * as crypto from 'crypto';
 import { diskStorage, StorageEngine } from 'multer';
-import { resolve } from 'path';
+import * as path from 'path';
 
-const rootFolder = resolve(__dirname, '..', '..');
-const tmpFolder = resolve(__dirname, rootFolder, 'tmp');
-const uploadFolder = resolve(__dirname, rootFolder, 'uploads');
+const rootFolder = path.resolve(__dirname, '..', '..');
+const tmpFolder = path.resolve(__dirname, rootFolder, 'temp');
+const uploadFolder = path.resolve(__dirname, rootFolder, 'uploads');
 
 interface IStorageConfig {
   provider: 'disk' | 's3';

@@ -5,7 +5,6 @@ import { StatusPayment } from 'src/payments/entities/status-payment.enum';
 
 export class CreateOrderBO {
   user_id: string;
-  store_id: string;
   cart: Cart[];
   delivery: {
     address: Address;

@@ -31,10 +31,6 @@ export class CreatePayments1644839743866 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'store_id',
-            type: 'uuid',
-          },
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -43,16 +39,6 @@ export class CreatePayments1644839743866 implements MigrationInterface {
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
-          },
-        ],
-        foreignKeys: [
-          {
-            name: 'StorePayment',
-            referencedTableName: 'stores',
-            referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
           },
         ],
       }),

@@ -1,6 +1,6 @@
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as path from 'path';
 import { storageConfig } from 'src/config/storage';
@@ -12,6 +12,7 @@ const providers = {
   disk: DiskStorageProvider,
 };
 
+@Global()
 @Module({
   imports: [
     MailerModule.forRootAsync({

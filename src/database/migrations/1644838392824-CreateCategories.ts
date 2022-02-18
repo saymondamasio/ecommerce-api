@@ -23,10 +23,6 @@ export class CreateCategories1644838392824 implements MigrationInterface {
             default: true,
           },
           {
-            name: 'store_id',
-            type: 'uuid',
-          },
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -35,16 +31,6 @@ export class CreateCategories1644838392824 implements MigrationInterface {
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
-          },
-        ],
-        foreignKeys: [
-          {
-            name: 'CategoriesStore',
-            columnNames: ['store_id'],
-            referencedTableName: 'stores',
-            referencedColumnNames: ['id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
           },
         ],
       }),

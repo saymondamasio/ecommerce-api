@@ -1,10 +1,7 @@
-import Store from 'src/stores/entities/store.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -30,13 +27,6 @@ export class Delivery {
 
   @Column('timestamp')
   deadline: Date;
-
-  @Column()
-  store_id: string;
-
-  @ManyToOne(() => Store)
-  @JoinColumn({ name: 'store_id' })
-  store: Store;
 
   @CreateDateColumn()
   created_at: Date;

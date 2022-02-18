@@ -6,14 +6,11 @@ import { CustomersRepository } from '../repositories/customers.repository';
 export class ListCustomersService {
   constructor(private customersRepository: CustomersRepository) {}
 
-  async execute(store_id: string): Promise<Customer[]> {
-    const store = await this.customersRepository.find({
-      where: {
-        store_id,
-      },
+  async execute(): Promise<Customer[]> {
+    const customer = await this.customersRepository.find({
       relations: ['user'],
     });
 
-    return store;
+    return customer;
   }
 }

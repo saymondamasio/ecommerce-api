@@ -36,3 +36,13 @@ lerna-debug.log*
 
 # env
 .env
+
+# Temp
+temp
+!.temp/.gitkeep
+uploads
+!.uploads/.gitkeep
+uploads/avatar
+!.uploads/avatar/.gitkeep
+uploads/products
+!.uploads/products/.gitkeep

@@ -35,7 +35,6 @@ export class CreateOrderService {
     cart,
     delivery,
     payment,
-    store_id,
     user_id,
   }: CreateOrderBO): Promise<Order> {
     //verificar estoque
@@ -139,7 +138,6 @@ export class CreateOrderService {
     }
 
     const deliveryCreated = this.deliveriesRepository.create({
-      store_id,
       address: delivery.address,
       deadline: delivery.deadline,
       cost: delivery.cost,
@@ -151,13 +149,11 @@ export class CreateOrderService {
     const paymentCreated = this.paymentsRepository.create({
       amount,
       status: StatusPayment[StatusPayment.PENDING],
-      store_id,
     });
     await this.paymentsRepository.save(paymentCreated);
 
     const order = this.ordersRepository.create({
       customer_id: customer.id,
-      store_id,
       cart,
       delivery_id: deliveryCreated.id,
       payment_id: paymentCreated.id,

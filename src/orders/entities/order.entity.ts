@@ -1,7 +1,6 @@
 import Customer from 'src/customers/entities/customer.entity';
 import { Delivery } from 'src/deliveries/entities/delivery.entity';
 import { Payment } from 'src/payments/entities/payment.entity';
-import Store from 'src/stores/entities/store.entity';
 import {
   Column,
   CreateDateColumn,
@@ -42,13 +41,6 @@ export class Order {
   @OneToOne(() => Delivery)
   @JoinColumn({ name: 'delivery_id' })
   delivery: Delivery;
-
-  @Column()
-  store_id: string;
-
-  @OneToOne(() => Store)
-  @JoinColumn({ name: 'store_id' })
-  store: Store;
 
   @Column('varchar', { default: false })
   is_cancelled: boolean;

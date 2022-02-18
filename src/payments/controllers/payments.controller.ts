@@ -9,8 +9,8 @@ import {
 import { ConfigService } from '@nestjs/config';
 import StripeService from 'src/shared/services/stripe.service';
 import { default as Stripe } from 'stripe';
+import RequestWithRawBody from '../../shared/interfaces/request-with-raw-body.interface';
 import { StatusPayment } from '../entities/status-payment.enum';
-import RequestWithRawBody from '../interfaces/request-with-raw-body.interface';
 import { CreateIntentPaymentService } from '../services/create-intent-payment.service';
 import { FindPaymentBySecretService } from '../services/find-payment-by-secret.service';
 import { UpdatePaymentService } from '../services/update-payment.service';

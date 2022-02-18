@@ -4,13 +4,13 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
-import rawBodyMiddleware from './payments/middlewares/raw-body.middleware';
 
 // const whitelist = ['example.com', 'api.example.com'];
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
+  app.useGlobalPipes(new ValidationPipe());
 
   app.enableCors({
     origin: configService.get('APP_WEB_URL'),
@@ -26,7 +26,6 @@ async function bootstrap() {
   //     }
   //   },
   // });
-  app.useGlobalPipes(new ValidationPipe());
   app.use(cookieParser());
   const config = new DocumentBuilder()
     .setTitle('Ecommerce')
@@ -38,8 +37,6 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-
-  app.use(rawBodyMiddleware());
 
   await app.listen(configService.get('PORT') || 3333);
   console.log(`🚀🚀 Application is running on: ${await app.getUrl()}`);

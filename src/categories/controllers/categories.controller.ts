@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { ValidateStoreGuard } from 'src/auth/guards/validate-store.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Role } from 'src/users/enums/role.enum';
 import { CreateCategoryService } from '../services/create-category.service';
 import { ListCategoriesService } from '../services/list-categories.service';
@@ -14,18 +14,15 @@ export class CategoriesController {
     private listCategories: ListCategoriesService,
   ) {}
 
-  @UseGuards(JwtAuthGuard, ValidateStoreGuard)
-  @Roles(Role.GUEST)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.ADMIN)
   @Post()
-  public create(
-    @Query('store_id') store_id: string,
-    @Body() createCategoryDto: CreateCategoryDTO,
-  ) {
-    return this.createCategory.execute({ store_id, ...createCategoryDto });
+  public create(@Body() createCategoryDto: CreateCategoryDTO) {
+    return this.createCategory.execute(createCategoryDto);
   }
 
   @Get()
-  public index(@Query('store_id') store_id: string) {
-    return this.listCategories.execute(store_id);
+  public index() {
+    return this.listCategories.execute();
   }
 }

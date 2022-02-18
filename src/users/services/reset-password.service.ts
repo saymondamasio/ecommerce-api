@@ -6,11 +6,6 @@ import { UserTokensRepository } from '../repositories/user-tokens.repository';
 import { UsersRepository } from '../repositories/users.repository';
 import { ResetPasswordBO } from './bos/reset-password.bo';
 
-interface IRequest {
-  password: string;
-  token: string;
-}
-
 @Injectable()
 export class ResetPasswordService {
   constructor(
