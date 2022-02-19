@@ -39,10 +39,10 @@ lerna-debug.log*
 
 # Temp
 tmp
-!.tmp/.gitkeep
+!tmp/.gitkeep
 uploads
-!.uploads/.gitkeep
+!uploads/.gitkeep
 uploads/avatar
-!.uploads/avatar/.gitkeep
+!uploads/avatar/.gitkeep
 uploads/products
-!.uploads/products/.gitkeep
+!uploads/products/.gitkeep
