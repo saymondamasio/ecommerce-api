@@ -6,18 +6,18 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Address } from './address';
-import { TypeDelivery } from './type-delivery.enum';
+import { TypeShipping } from './type-shipping.enum';
 
-@Entity('deliveries')
-export class Delivery {
+@Entity('shipments')
+export class Shipping {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   tracking_code: string;
 
-  @Column({ type: 'enum', enum: TypeDelivery })
-  type: TypeDelivery;
+  @Column({ type: 'enum', enum: TypeShipping })
+  type: TypeShipping;
 
   @Column(() => Address, { prefix: false })
   address: Address;

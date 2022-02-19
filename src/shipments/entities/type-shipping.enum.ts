@@ -1,4 +1,4 @@
-export enum TypeDelivery {
+export enum TypeShipping {
   PAC = 'PAC',
   SEDEX = 'SEDEX',
   SEDEX_10 = 'SEDEX_10',

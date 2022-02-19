@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CategoriesRepository } from 'src/categories/repositories/categories.repository';
 import { ProductsController } from './controllers/products.controller';
 import { ProductsRepository } from './repositories/products.repository';
 import { CreateProductService } from './services/create-product.service';
@@ -9,7 +10,9 @@ import { StockProductService } from './services/stock-product.service';
 import { UpdatePhotosProductService } from './services/update-photos-product.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProductsRepository])],
+  imports: [
+    TypeOrmModule.forFeature([ProductsRepository, CategoriesRepository]),
+  ],
   controllers: [ProductsController],
   providers: [
     CreateProductService,

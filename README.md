@@ -1,73 +1,164 @@
+<h1 align="center">
+	<img alt="Logo" src=".github/logo.svg" width="200px" />
+</h1>
+
+<h3 align="center">
+  Ecommerce
+</h3>
+
+<p align="center">Uma api feita para um ecommerce</p>
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/saymondamasio/ecommerce-api">
+
+  <a href="https://www.linkedin.com/in/saymondamasio/">
+    <img alt="Made by" src="https://img.shields.io/badge/made%20by-Saymon%20Damásio-gree">
+  </a>
+  
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/saymondamasio/ecommerce-api">
+  
+  <a href="https://github.com/saymondamasio/ecommerce-api/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/saymondamasio/ecommerce-api">
+  </a>
+  
+  <a href="https://github.com/saymondamasio/ecommerce-api/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/saymondamasio/ecommerce-api">
+  </a>
+  
+  <img alt="GitHub" src="https://img.shields.io/github/license/saymondamasio/ecommerce-api">
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+<p align="center">
+  <a href="#-about-the-project">About the project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-how-to-contribute">How to contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-license">License</a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<p id="insomniaButton" align="center">
+  <a href="https://insomnia.rest/run/?label=Ecommerce%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fsaymondamasio%2Fecommerce-api%2Fmaster%2Finsomnia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+</p>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 👨🏻‍💻 About the project
 
-## Installation
+<p>Essa API tem como objetivo administrar um sistema de alugueis de carros, tem como funcionalidade a criação e autenticação de um novo usuário, o cadastro de um novo carro, suas especificações e imagens, a criação de um aluguel para um carro disponível, criar a baixa da devolução do carro e a listagem de todos os alugueis de um usuário</p>
+
+<!-- To see the **web client**, click here: [PROJECT_NAME Web](https://github/saymondamasio/rentx-web)</br>
+To see the **mobile client**, click here: [PROJECT_NAME Mobile](https://github/saymondamasio/rentx-mobile) -->
+
+## 🚀 Technologies
+
+Technologies that I used to develop this api
+
+- [Node.js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Express](https://expressjs.com/pt-br/)
+- [Multer](https://github.com/expressjs/multer)
+- [TypeORM](https://typeorm.io/#/)
+- [JWT-token](https://jwt.io/)
+- [Handlebars](https://handlebarsjs.com/)
+- [uuid v4](https://github.com/thenativeweb/uuidv4/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [MongoDB](https://www.mongodb.com/)
+- [Redis](https://redis.io/)
+- [Tsyringe](https://github.com/microsoft/tsyringe/)
+- [Date.js](https://day.js.org/)
+- [Sentry](https://sentry.io/)
+- [Swagger](https://swagger.io/)
+- [Jest](https://jestjs.io/)
+- [SuperTest](https://github.com/visionmedia/supertest)
+- [Husky](https://github.com/typicode/husky)
+- [Commitlint](https://github.com/conventional-changelog/commitlint)
+- [Commitizen](https://github.com/commitizen/cz-cli)
+- [Eslint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [EditorConfig](https://editorconfig.org/)
+- [GithubActions](https://github.com/features/actions/)
+
+## 💻 Getting started
+
+Import the `Insomnia.json` on Insomnia App or click on [Run in Insomnia](#insomniaButton) button
+
+### Requirements
+
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
+- [Docker](https://www.docker.com//)
+
+> Obs.: Docker is required to run the project on a local machine.
+
+**Clone the project and access the folder**
 
 ```bash
-$ npm install
+$ git clone https://github.com/saymondamasio/ecommerce-api.git && cd ecommerce-api
 ```
 
-## Running the app
+**Follow the steps below**
 
 ```bash
-# development
-$ npm run start
+# Install the dependencies
+$ yarn
 
-# watch mode
-$ npm run start:dev
+# Create the instances databases using docker
+$ docker compose -d up
 
-# production mode
-$ npm run start:prod
+# Or create manually the instances databases
+docker run --name postgres-db -e POSTGRES_PASSWORD=admin -p 5432:5432 -d postgres
+# Don't forget to create the rentx database in postgres before running the project
+
+docker run --name mongo-db -p 27017:27017 -d mongo
+
+docker run --name redis-db -p 6379:6379 -d redis
+
+# Rename the ormconfig.example.json file to ormconfig.json
+
+mv ormconfig.example.json ormconfig.json
+
+# Once the services are running, run the migrations
+$ yarn typeorm migration:run
+
+# To finish, run the api service
+$ yarn dev
+
+# Well done, project is started!
 ```
 
-## Test
+## 🤔 How to contribute
+
+**Make a fork of this repository**
 
 ```bash
-# unit tests
-$ npm run test
+# Fork using GitHub official command line
+# If you don't have the GitHub CLI, use the web site to do that.
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+$ gh repo fork saymondamasio/ecommerce-api
 ```
 
-## Support
+**Follow the steps below**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+# Clone your fork
+$ git clone your-fork-url && cd NOME_DO_REPO
 
-## Stay in touch
+# Create a branch with your feature
+$ git checkout -b my-feature
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Make the commit with your changes
+$ git commit -m 'feat: My new feature'
+## or use cli commitlint
+$ yarn commit
 
-## License
+# Send the code to your remote branch
+$ git push origin my-feature
+```
 
-Nest is [MIT licensed](LICENSE).
+After your pull request is merged, you can delete your branch
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Made with 💜 &nbsp;by Saymon Damásio 👋 &nbsp;[See my linkedin](https://www.linkedin.com/in/saymondamasio/)

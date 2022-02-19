@@ -24,7 +24,7 @@ export class UpdatePhotosProductService {
       throw new BadRequestException('Product not found');
     }
 
-    if (product.photos.length > 0) {
+    if (product.photos?.length > 0) {
       for await (const photo of product.photos) {
         await this.storageProvider.deleteFile(photo, 'products');
       }

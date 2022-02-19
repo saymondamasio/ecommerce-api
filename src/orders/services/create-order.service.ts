@@ -1,23 +1,23 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CustomersRepository } from 'src/customers/repositories/customers.repository';
-import { TypeDelivery } from 'src/deliveries/entities/type-delivery.enum';
-import { DeliveriesRepository } from 'src/deliveries/repositories/deliveries.repository';
-import { CalculateDeliveryService } from 'src/deliveries/services/calculate-delivery.service';
 import { StatusPayment } from 'src/payments/entities/status-payment.enum';
 import { PaymentsRepository } from 'src/payments/repositories/payments.repository';
 import { Product } from 'src/products/entities/product.entity';
 import { ProductsRepository } from 'src/products/repositories/products.repository';
+import { TypeShipping } from 'src/shipments/entities/type-shipping.enum';
+import { ShipmentsRepository } from 'src/shipments/repositories/shipments.repository';
+import { CalculateShippingService } from 'src/shipments/services/calculate-shipping.service';
 import { compareInDays } from 'src/utils/date';
 import { Order } from '../entities/order.entity';
 import { OrdersRepository } from '../repositories/orders.repository';
 import { CreateOrderBO } from './bos/create-order.bo';
 
 const correiosCode = {
-  [TypeDelivery.PAC]: '04510',
-  [TypeDelivery.SEDEX]: '04014',
-  [TypeDelivery.SEDEX_10]: '04804',
-  [TypeDelivery.SEDEX_12]: '04782',
-  [TypeDelivery.SEDEX_HOJE]: '04804',
+  [TypeShipping.PAC]: '04510',
+  [TypeShipping.SEDEX]: '04014',
+  [TypeShipping.SEDEX_10]: '04804',
+  [TypeShipping.SEDEX_12]: '04782',
+  [TypeShipping.SEDEX_HOJE]: '04804',
 };
 
 @Injectable()
@@ -27,11 +27,11 @@ export class CreateOrderService {
     private productsRepository: ProductsRepository,
     private customersRepository: CustomersRepository,
     private paymentsRepository: PaymentsRepository,
-    private deliveriesRepository: DeliveriesRepository,
-    private calculateDelivery: CalculateDeliveryService,
+    private shipmentsRepository: ShipmentsRepository,
+    private calculateShipping: CalculateShippingService,
   ) {}
 
-  async execute({ cart, delivery, user_id }: CreateOrderBO): Promise<Order> {
+  async execute({ cart, shipping, user_id }: CreateOrderBO): Promise<Order> {
     //verificar estoque
 
     const errors: string[] = [];
@@ -52,22 +52,22 @@ export class CreateOrderService {
       }
     }
 
-    const deliveryOptions = await this.calculateDelivery.execute({
-      zip_code: delivery.address.zip_code,
+    const shippingOptions = await this.calculateShipping.execute({
+      zip_code: shipping.address.zip_code,
       cart,
     });
 
-    const deliveryOption = deliveryOptions.find(
-      (option) => option.type === delivery.type,
+    const shippingOption = shippingOptions.find(
+      (option) => option.type === shipping.type,
     );
 
-    amount += deliveryOption.cost;
+    amount += shippingOption.cost;
 
-    if (deliveryOption.cost !== delivery.cost) {
+    if (shippingOption.cost !== shipping.cost) {
       throw new BadRequestException('O valor da entrega não é o esperado');
     }
 
-    if (compareInDays(deliveryOption.deadline, delivery.deadline) !== 0) {
+    if (compareInDays(shippingOption.deadline, shipping.deadline) !== 0) {
       throw new BadRequestException(
         'A data limite de entrega não é a esperada',
       );
@@ -81,14 +81,14 @@ export class CreateOrderService {
       throw new BadRequestException('Customer not found');
     }
 
-    const deliveryCreated = this.deliveriesRepository.create({
-      address: delivery.address,
-      deadline: delivery.deadline,
-      cost: delivery.cost,
-      type: delivery.type,
+    const shippingCreated = this.shipmentsRepository.create({
+      address: shipping.address,
+      deadline: shipping.deadline,
+      cost: shipping.cost,
+      type: shipping.type,
     });
 
-    await this.deliveriesRepository.save(deliveryCreated);
+    await this.shipmentsRepository.save(shippingCreated);
 
     const paymentCreated = this.paymentsRepository.create({
       amount,
@@ -99,7 +99,7 @@ export class CreateOrderService {
     const order = this.ordersRepository.create({
       customer_id: customer.id,
       cart,
-      delivery_id: deliveryCreated.id,
+      shipping_id: shippingCreated.id,
       payment_id: paymentCreated.id,
     });
 

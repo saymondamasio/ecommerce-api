@@ -4,22 +4,22 @@ import { Product } from 'src/products/entities/product.entity';
 import { ProductsRepository } from 'src/products/repositories/products.repository';
 import { calculateBox } from 'src/utils/calculateBox';
 import { addDays } from 'src/utils/date';
-import { TypeDelivery } from '../entities/type-delivery.enum';
-import { CalculateDeliveryBO } from './bos/calculate-delivery.bo';
+import { TypeShipping } from '../entities/type-shipping.enum';
+import { CalculateShippingBO } from './bos/calculate-shipping.bo';
 
 const correiosCode = {
-  [TypeDelivery.PAC]: '04510',
-  [TypeDelivery.SEDEX]: '04014',
-  [TypeDelivery.SEDEX_10]: '04804',
-  [TypeDelivery.SEDEX_12]: '04782',
-  [TypeDelivery.SEDEX_HOJE]: '04804',
+  [TypeShipping.PAC]: '04510',
+  [TypeShipping.SEDEX]: '04014',
+  [TypeShipping.SEDEX_10]: '04804',
+  [TypeShipping.SEDEX_12]: '04782',
+  [TypeShipping.SEDEX_HOJE]: '04804',
 };
 
 @Injectable()
-export class CalculateDeliveryService {
+export class CalculateShippingService {
   constructor(private productsRepository: ProductsRepository) {}
 
-  async execute({ zip_code, cart }: CalculateDeliveryBO) {
+  async execute({ zip_code, cart }: CalculateShippingBO) {
     const errors: string[] = [];
     let weight = 0;
     const products: Product[] = [];
@@ -72,28 +72,28 @@ export class CalculateDeliveryService {
         args,
       )) as unknown as Array<PrecoPrazoEvent>;
 
-      const deliveryOptions = [];
+      const shippingOptions = [];
 
       if (resultCorreios && resultCorreios.length > 0) {
-        resultCorreios.forEach((deliveryType) => {
-          const cost = Number(deliveryType.Valor.replace(',', '.')) * 100;
+        resultCorreios.forEach((shippingType) => {
+          const cost = Number(shippingType.Valor.replace(',', '.')) * 100;
 
-          const deadline = addDays(Number(deliveryType.PrazoEntrega));
+          const deadline = addDays(Number(shippingType.PrazoEntrega));
 
           const [type] = Object.entries(correiosCode).find(
-            ([, value]) => value === deliveryType.Codigo,
+            ([, value]) => value === shippingType.Codigo,
           );
 
-          deliveryOptions.push({
+          shippingOptions.push({
             type,
             cost,
             deadline,
-            error: deliveryType.Erro !== '0' ? deliveryType.MsgErro : undefined,
+            error: shippingType.Erro !== '0' ? shippingType.MsgErro : undefined,
           });
         });
       }
 
-      return deliveryOptions;
+      return shippingOptions;
     } catch (err) {
       throw new BadRequestException(err.message);
     }

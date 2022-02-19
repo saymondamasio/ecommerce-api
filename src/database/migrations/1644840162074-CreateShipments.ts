@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateDeliveries1644840162074 implements MigrationInterface {
+export class CreateShipments1644840162074 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'deliveries',
+        name: 'shipments',
         columns: [
           {
             name: 'id',
@@ -20,7 +20,7 @@ export class CreateDeliveries1644840162074 implements MigrationInterface {
           },
           {
             name: 'type',
-            enumName: 'type_delivery',
+            enumName: 'type_shipping',
             type: 'enum',
             enum: ['PAC', 'SEDEX', 'SEDEX_10', 'SEDEX_12', 'SEDEX_HOJE'],
           },
@@ -79,6 +79,6 @@ export class CreateDeliveries1644840162074 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('deliveries');
+    await queryRunner.dropTable('shipments');
   }
 }

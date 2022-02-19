@@ -6,10 +6,11 @@ import {
   IsObject,
   ValidateNested,
 } from 'class-validator';
-import { Address } from 'src/deliveries/entities/address';
-import { TypeDelivery } from 'src/deliveries/entities/type-delivery.enum';
 import { CartItem } from 'src/orders/entities/cart-item';
 import { StatusPayment } from 'src/payments/entities/status-payment.enum';
+import { Address } from 'src/shipments/entities/address';
+import { Shipping } from 'src/shipments/entities/shipping.entity';
+import { TypeShipping } from 'src/shipments/entities/type-shipping.enum';
 
 class Payment {
   @IsNumber()
@@ -25,8 +26,8 @@ class Delivery {
   @Type(() => Address)
   address: Address;
 
-  @IsEnum(TypeDelivery)
-  type: TypeDelivery;
+  @IsEnum(TypeShipping)
+  type: TypeShipping;
 
   @IsNumber()
   cost: number;
@@ -43,8 +44,8 @@ export class CreateOrderDTO {
 
   @IsObject()
   @ValidateNested()
-  @Type(() => Delivery)
-  delivery: Delivery;
+  @Type(() => Shipping)
+  shipping: Shipping;
 
   @IsObject()
   @ValidateNested()

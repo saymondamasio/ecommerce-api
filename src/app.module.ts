@@ -16,12 +16,12 @@ import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { storageConfig } from './config/storage';
 import { CustomerModule } from './customers/customer.module';
-import { DeliveriesModule } from './deliveries/deliveries.module';
 import { OrdersModule } from './orders/orders.module';
 import { PaymentsModule } from './payments/payments.module';
 import { ProductsModule } from './products/products.module';
 import { RawBodyMiddleware } from './shared/middlewares/raw-body.middleware';
 import { SharedModule } from './shared/shared.module';
+import { ShipmentsModule } from './shipments/deliveries.module';
 import { UsersModule } from './users/users.module';
 
 @Global()
@@ -62,7 +62,7 @@ import { UsersModule } from './users/users.module';
     CategoriesModule,
     ProductsModule,
     PaymentsModule,
-    DeliveriesModule,
+    ShipmentsModule,
     OrdersModule,
   ],
   controllers: [AppController],
