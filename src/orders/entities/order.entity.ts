@@ -11,7 +11,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Cart } from './cart';
+import { CartItem } from './cart-item';
 
 @Entity('orders')
 export class Order {
@@ -19,7 +19,7 @@ export class Order {
   id: string;
 
   @Column('simple-json')
-  cart: Cart[];
+  cart: CartItem[];
 
   @Column('uuid')
   customer_id: string;

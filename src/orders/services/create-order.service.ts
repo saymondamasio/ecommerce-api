@@ -1,14 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { calcularPrecoPrazo, PrecoPrazoEvent } from 'correios-brasil';
 import { CustomersRepository } from 'src/customers/repositories/customers.repository';
 import { TypeDelivery } from 'src/deliveries/entities/type-delivery.enum';
 import { DeliveriesRepository } from 'src/deliveries/repositories/deliveries.repository';
+import { CalculateDeliveryService } from 'src/deliveries/services/calculate-delivery.service';
 import { StatusPayment } from 'src/payments/entities/status-payment.enum';
 import { PaymentsRepository } from 'src/payments/repositories/payments.repository';
 import { Product } from 'src/products/entities/product.entity';
 import { ProductsRepository } from 'src/products/repositories/products.repository';
-import { calculateBox } from 'src/utils/calculateBox';
-import { addDays, compareInDays } from 'src/utils/date';
+import { compareInDays } from 'src/utils/date';
 import { Order } from '../entities/order.entity';
 import { OrdersRepository } from '../repositories/orders.repository';
 import { CreateOrderBO } from './bos/create-order.bo';
@@ -29,18 +28,13 @@ export class CreateOrderService {
     private customersRepository: CustomersRepository,
     private paymentsRepository: PaymentsRepository,
     private deliveriesRepository: DeliveriesRepository,
+    private calculateDelivery: CalculateDeliveryService,
   ) {}
 
-  async execute({
-    cart,
-    delivery,
-    payment,
-    user_id,
-  }: CreateOrderBO): Promise<Order> {
+  async execute({ cart, delivery, user_id }: CreateOrderBO): Promise<Order> {
     //verificar estoque
 
-    const error: string[] = [];
-    let weight = 0;
+    const errors: string[] = [];
     const products: Product[] = [];
     let amount = 0;
 
@@ -51,82 +45,32 @@ export class CreateOrderService {
 
       products.push(product);
 
-      weight += product.weight * cart_item.quantity;
       amount += product.price * cart_item.quantity;
 
       if (product.stock < cart_item.quantity) {
-        error.push(`${product.title} - Não há estoque suficiente`);
+        errors.push(`${product.title} - Não há estoque suficiente`);
       }
     }
 
-    if (error.length > 0) {
-      throw new BadRequestException(error);
-    }
+    const deliveryOptions = await this.calculateDelivery.execute({
+      zip_code: delivery.address.zip_code,
+      cart,
+    });
 
-    const result = calculateBox(
-      products.map((product) => ({
-        height: product.height,
-        length: product.length,
-        width: product.width,
-        weight: product.weight,
-      })),
+    const deliveryOption = deliveryOptions.find(
+      (option) => option.type === delivery.type,
     );
 
-    //verificar entrega
-    const args = {
-      // Não se preocupe com a formatação dos valores de entrada do cep, qualquer uma será válida (ex: 21770-200, 21770 200, 21asa!770@###200 e etc),
-      sCepOrigem: '68600000',
-      sCepDestino: delivery.address.zip_code,
-      nVlPeso: String(weight / 1000), //em gramas
-      nCdFormato: '1',
-      nVlComprimento: String(result.comprimento),
-      nVlAltura: String(result.altura),
-      nVlLargura: String(result.largura),
-      nCdServico: [
-        correiosCode[TypeDelivery.PAC],
-        correiosCode[TypeDelivery.SEDEX],
-      ], //Array com os códigos de serviço
-      nVlDiametro: '0',
-      nValorDeclarado: String(amount / 100), //em reais
-    };
+    amount += deliveryOption.cost;
 
-    const resultCorreios = (await calcularPrecoPrazo(
-      args,
-    )) as unknown as Array<PrecoPrazoEvent>;
+    if (deliveryOption.cost !== delivery.cost) {
+      throw new BadRequestException('O valor da entrega não é o esperado');
+    }
 
-    if (resultCorreios && resultCorreios.length > 0) {
-      resultCorreios.forEach((deliveryType) => {
-        if (deliveryType.Codigo === correiosCode[delivery.type]) {
-          if (deliveryType.Erro !== '0') {
-            throw new BadRequestException(deliveryType.MsgErro);
-          }
-
-          const deliveryCost =
-            Number(deliveryType.Valor.replace(',', '.')) * 100;
-
-          const deadline = addDays(Number(deliveryType.PrazoEntrega));
-
-          amount += deliveryCost;
-
-          if (deliveryCost !== delivery.cost) {
-            throw new BadRequestException(
-              'O valor da entrega não é o esperado',
-            );
-          }
-
-          if (deliveryCost !== delivery.cost) {
-            throw new BadRequestException(
-              'O valor da entrega não é o esperado',
-            );
-          }
-
-          if (compareInDays(deadline, delivery.deadline) !== 0) {
-            throw new BadRequestException(
-              'A data limite de entrega não é a esperada',
-            );
-          }
-        }
-      });
+    if (compareInDays(deliveryOption.deadline, delivery.deadline) !== 0) {
+      throw new BadRequestException(
+        'A data limite de entrega não é a esperada',
+      );
     }
 
     const customer = await this.customersRepository.findOne({

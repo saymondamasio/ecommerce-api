@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CustomersRepository } from 'src/customers/repositories/customers.repository';
+import { DeliveriesModule } from 'src/deliveries/deliveries.module';
 import { DeliveriesRepository } from 'src/deliveries/repositories/deliveries.repository';
 import { PaymentsRepository } from 'src/payments/repositories/payments.repository';
 import { ProductsRepository } from 'src/products/repositories/products.repository';
@@ -17,6 +18,7 @@ import { CreateOrderService } from './services/create-order.service';
       PaymentsRepository,
       DeliveriesRepository,
     ]),
+    DeliveriesModule,
   ],
   controllers: [OrdersController],
   providers: [CreateOrderService],

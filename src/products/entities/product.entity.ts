@@ -48,14 +48,14 @@ export class Product {
 
   @Expose({ name: 'photos_url', toPlainOnly: true })
   getPhotosUrl(): string[] | undefined {
-    if (this.photos?.length > 0) {
+    if (!this.photos || this.photos.length === 0) {
       return undefined;
     }
 
     switch (storageConfig.provider) {
       case 'disk':
         return this.photos.map(
-          (photo) => `${process.env.APP_API_URL}/files/${photo}`,
+          (photo) => `${process.env.APP_API_URL}/files/products/${photo}`,
         );
       default:
         return undefined;
