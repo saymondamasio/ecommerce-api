@@ -21,7 +21,7 @@ import { PaymentsModule } from './payments/payments.module';
 import { ProductsModule } from './products/products.module';
 import { RawBodyMiddleware } from './shared/middlewares/raw-body.middleware';
 import { SharedModule } from './shared/shared.module';
-import { ShipmentsModule } from './shipments/deliveries.module';
+import { ShipmentsModule } from './shipments/shipments.module';
 import { UsersModule } from './users/users.module';
 
 @Global()
