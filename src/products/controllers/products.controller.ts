@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   ClassSerializerInterceptor,
   Controller,
@@ -48,6 +49,10 @@ export class ProductsController {
     @UploadedFiles() photos: Express.Multer.File[],
     @Param('product_id') product_id: string,
   ) {
+    if (photos.length === 0) {
+      throw new BadRequestException('No photos were uploaded.');
+    }
+
     return this.updatePhotosProduct.execute({
       photos: photos.map((photo) => photo.filename),
       product_id,

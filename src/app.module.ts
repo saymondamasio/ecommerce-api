@@ -5,10 +5,13 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
 import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis';
 import { getConnectionOptions } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -46,6 +49,15 @@ import { UsersModule } from './users/users.module';
     //   }),
     //   inject: [ConfigService],
     // }),
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        ttl: config.get('THROTTLE_TTL'),
+        limit: config.get('THROTTLE_LIMIT'),
+        storage: new ThrottlerStorageRedisService(config.get('REDIS_URL')),
+      }),
+    }),
     ServeStaticModule.forRoot({
       rootPath: storageConfig.uploadFolder,
       serveRoot: '/files',
@@ -66,7 +78,13 @@ import { UsersModule } from './users/users.module';
     OrdersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
   exports: [MulterModule],
 })
 export class AppModule implements NestModule {
