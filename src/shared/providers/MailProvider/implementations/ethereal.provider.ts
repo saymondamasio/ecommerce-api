@@ -1,10 +1,10 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
-import { ISendMailDTO } from './dtos/send-mail.dto';
+import { ISendMailDTO } from 'src/shared/mail/dtos/send-mail.dto';
 
 @Injectable()
-export class MailService {
+export class EtherealMailProvider {
   constructor(private mailerService: MailerService) {}
 
   public async sendMail({

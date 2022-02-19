@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AppError } from 'src/shared/errors/AppError';
-import { MailService } from 'src/shared/mail/mail.service';
+import { IMailProvider } from 'src/shared/providers/MailProvider/models/mail.provider';
 import { addHours } from 'src/utils/date';
 import { UserTokensRepository } from '../repositories/user-tokens.repository';
 import { UsersRepository } from '../repositories/users.repository';
@@ -11,7 +11,8 @@ export class SendForgotPasswordEmailService {
   constructor(
     private usersRepository: UsersRepository,
     private userTokensRepository: UserTokensRepository,
-    private mailService: MailService,
+    @Inject('MailProvider')
+    private mailProvider: IMailProvider,
     private config: ConfigService,
   ) {}
 
@@ -33,7 +34,7 @@ export class SendForgotPasswordEmailService {
 
     const { token } = await this.userTokensRepository.save(userToken);
 
-    await this.mailService.sendMail({
+    await this.mailProvider.sendMail({
       to: {
         name: user.name,
         email: user.email,

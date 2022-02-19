@@ -7,16 +7,12 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { CartItem } from 'src/orders/entities/cart-item';
-import { StatusPayment } from 'src/payments/entities/status-payment.enum';
 import { Address } from 'src/shipments/entities/address';
 import { TypeShipping } from 'src/shipments/entities/type-shipping.enum';
 
 class Payment {
   @IsNumber()
   amount: number;
-
-  @IsEnum(StatusPayment)
-  status: StatusPayment;
 }
 
 class Shipping {

@@ -4,7 +4,7 @@ import { Global, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as path from 'path';
 import { storageConfig } from 'src/config/storage';
-import { MailService } from './mail/mail.service';
+import { EtherealMailProvider } from './providers/MailProvider/implementations/ethereal.provider';
 import DiskStorageProvider from './providers/StorageProvider/implementations/disk-storage.provider';
 import StripeService from './services/stripe.service';
 
@@ -19,7 +19,7 @@ const providers = {
       useFactory: async (config: ConfigService) => ({
         transport: {
           host: config.get('MAIL_HOST'),
-          // port: 587,
+          port: config.get('MAIL_PORT') || 587,
           auth: {
             user: config.get('MAIL_USER'),
             pass: config.get('MAIL_PASSWORD'),
@@ -44,9 +44,12 @@ const providers = {
       provide: 'StorageProvider',
       useClass: providers[storageConfig.provider],
     },
-    MailService,
+    {
+      provide: 'MailProvider',
+      useClass: EtherealMailProvider,
+    },
     StripeService,
   ],
-  exports: ['StorageProvider', MailService, StripeService],
+  exports: ['StorageProvider', 'MailProvider', StripeService],
 })
 export class SharedModule {}
