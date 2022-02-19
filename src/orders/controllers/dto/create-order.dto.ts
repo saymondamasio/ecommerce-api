@@ -9,7 +9,6 @@ import {
 import { CartItem } from 'src/orders/entities/cart-item';
 import { StatusPayment } from 'src/payments/entities/status-payment.enum';
 import { Address } from 'src/shipments/entities/address';
-import { Shipping } from 'src/shipments/entities/shipping.entity';
 import { TypeShipping } from 'src/shipments/entities/type-shipping.enum';
 
 class Payment {
@@ -20,7 +19,7 @@ class Payment {
   status: StatusPayment;
 }
 
-class Delivery {
+class Shipping {
   @IsObject()
   @ValidateNested()
   @Type(() => Address)

@@ -7,7 +7,7 @@ export class ShipmentsController {
   constructor(private calculateShippingService: CalculateShippingService) {}
 
   @Post('calculate')
-  calculateDelivery(@Body() calculateShippingDTO: CalculateShippingDTO) {
+  calculateShipping(@Body() calculateShippingDTO: CalculateShippingDTO) {
     return this.calculateShippingService.execute(calculateShippingDTO);
   }
 }

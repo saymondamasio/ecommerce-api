@@ -26,7 +26,7 @@ export class CreateOrders1644840422176 implements MigrationInterface {
             type: 'uuid',
           },
           {
-            name: 'delivery_id',
+            name: 'shipping_id',
             type: 'uuid',
           },
           {
@@ -63,10 +63,10 @@ export class CreateOrders1644840422176 implements MigrationInterface {
             onUpdate: 'CASCADE',
           },
           {
-            name: 'DeliveryOrder',
-            referencedTableName: 'deliveries',
+            name: 'ShippingOrder',
+            referencedTableName: 'shipments',
             referencedColumnNames: ['id'],
-            columnNames: ['delivery_id'],
+            columnNames: ['shipping_id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },
