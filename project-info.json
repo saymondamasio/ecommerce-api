@@ -1,8 +1,12 @@
 {
   "name": "Ecommerce",
-  "description": "Essa API tem como objetivo administrar um sistema de alugueis de carros, tem como funcionalidade a criação e autenticação de um novo usuário, o cadastro de um novo carro, suas especificações e imagens, a criação de um aluguel para um carro disponível, criar a baixa da devolução do carro e a listagem de todos os alugueis de um usuário.",
+  "description": "Essa API tem como objetivo de administrar produtos e clientes de seu ecommerce. Foi feita uma integrações com Stripe um sistema de pagamentos online e com os Correios para obter informações de entrega.",
   "short_description": "Uma api feita para ecommerce",
   "techs": [
+    {
+      "name": "Nest.js",
+      "url": "https://nestjs.com/"
+    },
     {
       "name": "Node.js",
       "url": "https://nodejs.org/"
@@ -10,10 +14,6 @@
     {
       "name": "Typescript",
       "url": "https://www.typescriptlang.org/"
-    },
-    {
-      "name": "Express.js",
-      "url": "https://expressjs.com/"
     },
     {
       "name": "Multer",
@@ -32,10 +32,6 @@
       "url": "https://handlebarsjs.com/"
     },
     {
-      "name": "UUID V4",
-      "url": "https://github.com/thenativeweb/uuidv4/"
-    },
-    {
       "name": "PostgreSQL",
       "url": "https://www.postgresql.org/"
     },
@@ -52,36 +48,20 @@
       "url": "https://github.com/microsoft/tsyringe/"
     },
     {
-      "name": "Date.js",
+      "name": "dayjs",
       "url": "https://day.js.org/"
     },
     {
-      "name": "Sentry",
-      "url": "https://sentry.io/"
+      "name": "Stripe",
+      "url": "https://stripe.com/"
+    },
+    {
+      "name": "Correios",
+      "url": "https://www.correios.com.br/"
     },
     {
       "name": "Swagger",
       "url": "https://swagger.io/"
-    },
-    {
-      "name": "Jest",
-      "url": "https://jestjs.io/"
-    },
-    {
-      "name": "SuperTest",
-      "url": "https://github.com/visionmedia/supertest"
-    },
-    {
-      "name": "Husky",
-      "url": "https://github.com/typicode/husky"
-    },
-    {
-      "name": "Commitlint",
-      "url": "https://github.com/conventional-changelog/commitlint"
-    },
-    {
-      "name": "Commitizen",
-      "url": "https://github.com/commitizen/cz-cli"
     },
     {
       "name": "Eslint",

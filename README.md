@@ -42,7 +42,7 @@
 
 ## 👨🏻‍💻 About the project
 
-<p>Essa API tem como objetivo administrar um sistema de alugueis de carros, tem como funcionalidade a criação e autenticação de um novo usuário, o cadastro de um novo carro, suas especificações e imagens, a criação de um aluguel para um carro disponível, criar a baixa da devolução do carro e a listagem de todos os alugueis de um usuário</p>
+<p>Essa API tem como objetivo de administrar produtos e clientes de seu ecommerce. Foi feita uma integrações com Stripe um sistema de pagamentos online e com os Correios para obter informações de entrega.</p>
 
 <!-- To see the **web client**, click here: [PROJECT_NAME Web](https://github/saymondamasio/rentx-web)</br>
 To see the **mobile client**, click here: [PROJECT_NAME Mobile](https://github/saymondamasio/rentx-mobile) -->
@@ -51,9 +51,10 @@ To see the **mobile client**, click here: [PROJECT_NAME Mobile](https://github/s
 
 Technologies that I used to develop this api
 
+- [Nest.js](https://nestjs.com/)
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Express](https://expressjs.com/pt-br/)
+- [Stripe](https://stripe.com/)
 - [Multer](https://github.com/expressjs/multer)
 - [TypeORM](https://typeorm.io/#/)
 - [JWT-token](https://jwt.io/)
@@ -63,14 +64,8 @@ Technologies that I used to develop this api
 - [MongoDB](https://www.mongodb.com/)
 - [Redis](https://redis.io/)
 - [Tsyringe](https://github.com/microsoft/tsyringe/)
-- [Date.js](https://day.js.org/)
-- [Sentry](https://sentry.io/)
+- [dayjs](https://day.js.org/)
 - [Swagger](https://swagger.io/)
-- [Jest](https://jestjs.io/)
-- [SuperTest](https://github.com/visionmedia/supertest)
-- [Husky](https://github.com/typicode/husky)
-- [Commitlint](https://github.com/conventional-changelog/commitlint)
-- [Commitizen](https://github.com/commitizen/cz-cli)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 - [EditorConfig](https://editorconfig.org/)
@@ -100,9 +95,6 @@ $ git clone https://github.com/saymondamasio/ecommerce-api.git && cd ecommerce-a
 # Install the dependencies
 $ yarn
 
-# Create the instances databases using docker
-$ docker compose -d up
-
 # Or create manually the instances databases
 docker run --name postgres-db -e POSTGRES_PASSWORD=admin -p 5432:5432 -d postgres
 # Don't forget to create the rentx database in postgres before running the project
@@ -111,15 +103,8 @@ docker run --name mongo-db -p 27017:27017 -d mongo
 
 docker run --name redis-db -p 6379:6379 -d redis
 
-# Rename the ormconfig.example.json file to ormconfig.json
-
-mv ormconfig.example.json ormconfig.json
-
-# Once the services are running, run the migrations
-$ yarn typeorm migration:run
-
 # To finish, run the api service
-$ yarn dev
+$ yarn start:dev
 
 # Well done, project is started!
 ```
