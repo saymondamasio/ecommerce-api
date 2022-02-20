@@ -5,6 +5,7 @@ import { ProfileController } from './controllers/profile.controller';
 import { UsersController } from './controllers/users.controller';
 import { UserTokensRepository } from './repositories/user-tokens.repository';
 import { UsersRepository } from './repositories/users.repository';
+import { CreateUserWithGoogleService } from './services/create-user-with-google.service';
 import { CreateUserService } from './services/create-user.service';
 import { FindUserByEmailService } from './services/find-user-by-email.service';
 import { ResetPasswordService } from './services/reset-password.service';
@@ -24,7 +25,8 @@ import { UpdateUserAvatarService } from './services/update-user-avatar.service';
     ResetPasswordService,
     SendForgotPasswordEmailService,
     ShowProfileService,
+    CreateUserWithGoogleService,
   ],
-  exports: [FindUserByEmailService],
+  exports: [CreateUserWithGoogleService],
 })
 export class UsersModule {}

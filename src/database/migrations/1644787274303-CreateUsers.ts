@@ -30,6 +30,12 @@ export class CreateUsers1644787274303 implements MigrationInterface {
           {
             name: 'password',
             type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'is_registered_with_google',
+            type: 'boolean',
+            default: false,
           },
           {
             name: 'permissions',

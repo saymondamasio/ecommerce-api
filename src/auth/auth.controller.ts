@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -12,6 +13,7 @@ import { ConfigService } from '@nestjs/config';
 import { User } from 'src/users/entities/user.entity';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { TokenVerificationDTO } from './dtos/token-verification-dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import JwtRefreshGuard from './guards/jwt-refresh-token.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -27,6 +29,14 @@ export class AuthController {
   @Post('login')
   async login(@CurrentUser() user: User, @Res({ passthrough: true }) res) {
     return this.authService.login(user, res);
+  }
+
+  @Post('google')
+  async authenticate(
+    @Body() tokenData: TokenVerificationDTO,
+    @Res({ passthrough: true }) res,
+  ) {
+    return await this.authService.authenticateWithGoogle(tokenData.token, res);
   }
 
   @UseGuards(JwtRefreshGuard)

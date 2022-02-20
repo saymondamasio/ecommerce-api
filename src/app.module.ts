@@ -11,6 +11,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as Joi from 'joi';
 import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis';
 import { getConnectionOptions } from 'typeorm';
 import { AppController } from './app.controller';
@@ -32,6 +33,10 @@ import { UsersModule } from './users/users.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true, // no need to import into other modules
+      validationSchema: Joi.object({
+        GOOGLE_CLIENT_ID: Joi.string().required(),
+        GOOGLE_CLIENT_SECRET: Joi.string().required(),
+      }),
     }),
     TypeOrmModule.forRootAsync({
       useFactory: async () =>

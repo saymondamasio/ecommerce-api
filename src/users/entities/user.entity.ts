@@ -40,9 +40,12 @@ export class User {
     }
   }
 
-  @Column()
+  @Column({ nullable: true })
   @Exclude()
-  password: string;
+  password?: string;
+
+  @Column({ name: 'is_registered_with_google', default: false })
+  isRegisteredWithGoogle: boolean;
 
   @Column({
     type: 'text',
